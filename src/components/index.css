@@ -1,0 +1,35 @@
+.contanier{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.button{
+  font-size: 40px;
+  height: 60px;
+  width: 70px;
+  margin-right: -1px;
+  margin-top: -1px;
+  text-align: center;
+  border: 2px solid red;
+  float: left;
+  padding: 0;
+  cursor: pointer;
+}
+
+.row-container{
+  display: flex;
+} 
+
+.reset-btn{
+  margin-top: 20px;
+  margin-right: 83% ;
+  padding: 5px;
+  color: rgb(6, 6, 6);
+  background-color: beige;
+  font-size: 19px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
