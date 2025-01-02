@@ -5,7 +5,7 @@ import "./index.css";
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(""));
   const [isXturn, setIsXturn] = useState(true);
-  let array = [...squares];
+  const array = [...squares];
   let status;
 
   function handleClick(getValue) {
@@ -46,40 +46,37 @@ export default function Board() {
   if (winner) {
     status = "Winner " + winner;
   } else if (!winner && squares.every((item) => item !== "")) {
-    status = "It's Draw. Restart the game again.";
+    status = "It's a Draw. Restart the game.";
   } else {
-    status = "Next Player " + (isXturn ? "X" : "O");
+    status = "Next Player: " + (isXturn ? "X" : "O");
   }
 
   return (
-    <>
-      <div className="container">
-        <h1>{status}</h1>
-        <div className="row-container">
-          <Square value={squares[0]} onHandleClick={() => handleClick(0)} />
-          <Square value={squares[1]} onHandleClick={() => handleClick(1)} />
-          <Square value={squares[2]} onHandleClick={() => handleClick(2)} />
+    <div className="container">
+      <h1>{status}</h1>
+      {[0, 1, 2].map((row) => (
+        <div className="row-container" key={row}>
+          {[0, 1, 2].map((col) => {
+            const index = row * 3 + col;
+            return (
+              <Square
+                key={index}
+                value={squares[index]}
+                onHandleClick={() => handleClick(index)}
+              />
+            );
+          })}
         </div>
-        <div className="row-container">
-          <Square value={squares[3]} onHandleClick={() => handleClick(3)} />
-          <Square value={squares[4]} onHandleClick={() => handleClick(4)} />
-          <Square value={squares[5]} onHandleClick={() => handleClick(5)} />
-        </div>
-        <div className="row-continer">
-          <Square value={squares[6]} onHandleClick={() => handleClick(6)} />
-          <Square value={squares[7]} onHandleClick={() => handleClick(7)} />
-          <Square value={squares[8]} onHandleClick={() => handleClick(8)} />
-        </div>
-        <button
-          className="reset-btn"
-          onClick={() => {
-            setSquares(Array(9).fill(""));
-            setIsXturn(true);
-          }}
-        >
-          Reset
-        </button>
-      </div>
-    </>
+      ))}
+      <button
+        className="reset-btn"
+        onClick={() => {
+          setSquares(Array(9).fill(""));
+          setIsXturn(true);
+        }}
+      >
+        Reset
+      </button>
+    </div>
   );
 }
